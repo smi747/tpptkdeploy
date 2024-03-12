@@ -1,7 +1,7 @@
-USE positions;
-DELETE FROM position;
+USE tpptkdb;
+DELETE FROM positions_table;
 LOAD DATA INFILE 'GFG' 
-INTO TABLE position 
+INTO TABLE positions_table
 FIELDS TERMINATED BY ':'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
