@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel="stylesheet" href="styles.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <title>ООО ТПП "ТехКомплект" - Тракторные запчасти: Интернет-магазин</title>
+    <meta name="description" content="Запчасти для спецтехники и сельхоз машин. Более 10'000 наименований!">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+     <script>
+       function onSubmit(token) {
+        if (document.getElementById("cart_form").checkValidity())
+          document.getElementById("cart_form").submit();
+        else
+        alert("Заполните обязательные поля");
+          grecaptcha.reset();
+       }
+     </script>
+</head>
+<body class="body" id="body">
+    <header class="header">
+        <div class="header__menu" id="menu">
+            <nav class="navigation">
+                <a href="#" class="navigation__logo"><img src="images/logo_0.png" alt="" class="logo_0"><img src="images/logo_1.png" alt="" class="logo_1"></a>
+                <a href="#catalog" id="catalog_id" class="navigation__link"><div class="triangle_l"></div>КАТАЛОГ<div class="triangle_r"></div></a>
+                <a href="#gallery" id="gallery_id" class="navigation__link"><div class="triangle_l"></div>ПОЛЕЗНОЕ<div class="triangle_r"></div></a>
+                <a href="#contacts" id="contacts_id" class="navigation__link"><div class="triangle_l"></div>КОНТАКТЫ<div class="triangle_r"></div></a>
+            </nav>
+            <div class="menu__right">
+                <div class="right_l">
+                    <a href="mailto:493929@bk.ru" class="menu__text menu__mail other_opacity_elements">493929@bk.ru</a>
+                    <div class="socials">
+                        <a href="https://wa.me/79109351048" class="social_link social_link_wa other_opacity_elements"><img src="images/icons/wa.png" alt="" class="icon social_wa"></a>
+                        <a href="viber://chat?number=79109351048" class="social_link social_link_wa other_opacity_elements"><img src="images/icons/viber.png" alt="" class="icon social_viber"></a>
+                        <a href="https://t.me/tpptktver" class="social_link social_link_wa other_opacity_elements"><img src="images/icons/tg.png" alt="" class="icon social_tg"></a>
+                        <a href="tel:+74822493929" class="social_link social_link_p other_opacity_elements"><img src="images/icons/phone1.png" alt="" class="icon social_tg"></a>
+                        <a href="tel:+74822493919" class="social_link social_link_p other_opacity_elements"><img src="images/icons/phone2.png" alt="" class="icon social_tg"></a>
+                    </div>
+                </div>
+                <div class="right_c">
+                    <a href="tel:+74822493929" class="header__phone menu__text other_opacity_elements">+7(4822) <b>49-39-29</b></a>
+                    <a href="tel:+74822493919" class="header__phone menu__text other_opacity_elements">+7(4822) <b>49-39-19</b></a>
+                </div>
+                <div class="cart_wrap" onclick="main__menu.classList.remove('opened');cart.classList.add('openedcart')"><div class="menu__cart_wrap"><div class="menu__cart other_opacity_elements"></div><div class="cart_number"><div id="reactnumber"></div></div></div><!--<div class="cart_price"><p>0.0<br>руб.</p></div>--></div>
+                <img src="images/icons/menu.png" alt="" class="right_r other_opacity_elements" onclick="main__menu.classList.add('opened')">
+            </div>
+        </div>
+    </header>
+    <main>
+      <div class="main__menu" id="main__menu">
+        <div class="menu__firstrow">
+          <div class="cart_wrap" onclick="main__menu.classList.remove('opened');cart.classList.add('openedcart')"><div class="menu__cart_wrap"><div class="menu__cart other_opacity_elements"></div><div class="cart_number"><div id="reactnumber_2"></div></div></div><!--<div class="cart_price"><p>0.0<br>руб.</p></div>--></div>
+          <div class="main__menu_close other_opacity_elements" onclick="main__menu.classList.remove('opened')"></div>
+        </div>
+        <div class="main__menu_links">
+          <a href="#catalog" class="main__menu_link other_opacity_elements" onclick="main__menu.classList.remove('opened')">Каталог</a>
+          <a href="#gallery" class="main__menu_link other_opacity_elements" onclick="main__menu.classList.remove('opened')">Полезное</a>
+          <a href="#contacts" class="main__menu_link other_opacity_elements" onclick="main__menu.classList.remove('opened')">Контакты</a>
+        </div>
+        <div id="otherpages_reactroot">
+          <!--<p class="another_link" onclick="main__menu.classList.remove('opened');open_otherpage('about_page')">О компании</p>
+          <p class="another_link" onclick="main__menu.classList.remove('opened');open_otherpage('req_page')">Реквизиты</p>-->
+        </div>
+      </div>
+        <section class="section_1" id="section_1">
+          <div onclick="window.location.href='#catalog'" class="text_2">Запасные части для<br> <span
+            class="txt-rotate"
+            data-period="1500"
+            data-rotate='[ "спецтехники", "тракторов", "комбайнов", "сеялок", "косилок", "культиваторов"]'></span></div>
+          </div>
+          <a href="#catalog" class="scrolldown"></a>
+        </section>
+        <section class="section_2" id="catalog">
+          <div class="sticky-back"></div>
+          <div class="react-catalog" id="reactcatalog"></div>
+        </section>
+        <section class="section_3" id="gallery">
+            <style>
+                :root {
+                --swiper-navigation-color: white;
+                --swiper-theme-color: white;
+                --swiper-pagination-bullet-inactive-color: gray;
+                }
+                .swiper {
+                  width: 100%;
+                  padding-top: 80px;
+                  padding-bottom: 50px;
+                }
+            
+                .swiper-slide {
+                  background-position: center;
+                  background-size: cover;
+                  width: 46vh;
+                  height: 65vh;
+                  background-color: #000;
+                  overflow: hidden;
+                  position: relative;
+                }
+                @media screen and (max-width: 1400px) {
+                  .swiper {
+                    padding-top: 70px;
+                    padding-bottom: 40px;
+                  }
+                  }
+                  @media screen and (max-width: 1200px) {
+                    .swiper {
+                      padding-top: 60px;
+                      padding-bottom: 30px;
+                    }
+                  }
+                  @media screen and (max-width: 767px) {
+                    .swiper {
+                      padding-top: 40px;
+                      padding-bottom: 30px;
+                    }
+                  }
+                  @media screen and (max-width: 450px) {
+                    .swiper {
+                      padding-top: 20px;
+                      padding-bottom: 30px;
+                    }
+                  }
+            
+                .swiper-slide img {
+                  display: block;
+                  min-height: 100%;
+                  object-fit: cover;
+                }
+              </style>
+              <div id="swiper_reactroot">
+              </div>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <div class="more_books">Больше руководств и справочных материалов вы сможете найти по <a href="https://www.tpptk.ru/index.php?option=com_content&view=article&id=4&Itemid=109">ссылке</a></div>
+        </section>
+        <section class="section_4" id="contacts">
+          <div class="contacts_l">
+            <div class="contacts__textblock">
+              <h2 class="contacts_section">АДРЕС</h2>
+              <p class="contacts__text">170027, г. Тверь, ул. Освобождения, д.201</p>
+              <h2 class="contacts_section">ТЕЛЕФОН</h2>
+              <p class="contacts__text"><a href="tel:+79109351048" class="contacts__phone other_opacity_elements">+7-910-935-10-48</a></p>
+              <h2 class="contacts_section">ЭЛЕКТРОННАЯ ПОЧТА</h2>
+              <p class="contacts__text"><a href="mailto:493929@bk.ru" class="contacts__mail other_opacity_elements">493929@bk.ru</a></p>
+              <h2 class="contacts_section">МЫ В СЕТИ</h2>
+              <div class="contacts__socials">
+                <a href="https://wa.me/79109351048" class="other_opacity_elements"><img src="images/icons/wa.png" alt="" class="icon social_wa"></a>
+                <a href="viber://chat?number=79109351048" class="other_opacity_elements"><img src="images/icons/viber.png" alt="" class="icon social_viber"></a>
+                <a href="https://t.me/tpptktver" class="other_opacity_elements"><img src="images/icons/tg.png" alt="" class="icon social_tg"></a>
+                <a href="https://vk.com/tktver" class="other_opacity_elements"><img src="images/icons/vk.png" alt="" class="icon social_tg"></a>
+              </div>
+
+              
+            </div>
+          </div>
+          <div class="contacts_r">
+            <div class="map" style="position:relative;overflow:hidden;width:100%"><a href="https://yandex.ru/maps/org/tekhkomplekt/1091519799/?utm_medium=mapframe&amp;utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Техкомплект</a><a href="https://yandex.ru/maps/14/tver/category/agricultural_machinery_equipment/184106620/?utm_medium=mapframe&amp;utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Сельскохозяйственная техника, оборудование в Твери</a><a href="https://yandex.ru/maps/14/tver/category/special_equipment_and_special_vehicles/184106622/?utm_medium=mapframe&amp;utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Спецтехника и спецавтомобили в Твери</a><iframe src="https://yandex.ru/map-widget/v1/?ll=35.876605%2C56.825278&amp;mode=poi&amp;poi%5Bpoint%5D=35.876276%2C56.825299&amp;poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1091519799&amp;z=18.98" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe></div>
+          </div>
+        </section>
+        <div class="" style="display:none">
+        <div class="vp viewport_0">>1400</div>
+        <div class="vp viewport_1">1200-1400</div>
+        <div class="vp viewport_2">767-1200</div>
+        <div class="vp viewport_3">450-676</div>
+        <div class="vp viewport_4">less450</div>
+      </div>
+        <footer class="footer">
+          <div class="end_wrap"><p>Design and development by </p><a href="https://smi.works" class="smi_link"><img src="images/icons/smi.png" alt="" class="smi_"></a></div></footer>
+    
+          <div class="cart" id="cart"><div class="cart_" id="cart_">
+            <div class="cart_row_1">
+              <div class="cart_row_1_text">КОРЗИНА</div>
+              <div class="cart_row_1_close other_opacity_elements_s" onclick="is_ordered();cart.classList.remove('openedcart')"></div>
+            </div>
+            <div class="cart_row_2"><div class="cart_row_2_text ordered-hidden">Наименование</div><div class="cart_row_2_text ordered-hidden">Кол-во/Стоимость</div></div>
+            <div style="display: none;" class="cart_row_4" id="orderen-unhidden">Ваш заказ принят в обработку.<br><br>В течение дня наш сотрудник даст ответ или свяжется с Вами для уточнения деталей по заказу.<br><br>Если Вы ничего не получите, то свяжитесь с нами по телефону 8-960-889-76-67 и уточните информацию по Вашему заказу.<br><br>WhatsApp, Telegram, Viber: +79272533955</div>
+            <div id="reactcart" class="ordered-hidden">
+            <div class="positions">
+              <div class="cart_position">
+                <div class="position_name">Балка двутавровая низколегированная 20К1 09Г2С</div>
+                <div class="position_quantity"><input type="text" class="position_quantity_i" value="100"><pre> / </pre><div class="input_wrap"><input type="text" class="position_quantity_i" value="1000"><div class="ed_izm">метры</div></div></div>
+                <div class="position_close"><div class="position_close_img" onclick="this.parentNode.parentNode.remove();"></div></div>
+              </div>
+              <div class="cart_position">
+                <div class="position_name">Балка двутавровая низколегированная 20К1 09Г2С</div>
+                <div class="position_quantity"><input type="text" class="position_quantity_i" value="100"><pre> / </pre><div class="input_wrap"><input type="text" class="position_quantity_i" value="1000"><div class="ed_izm">штуки</div></div></div>
+                <div class="position_close"><div class="position_close_img" onclick="this.parentNode.parentNode.remove();"></div></div>
+              </div>
+              <div class="cart_position">
+                <div class="position_name">Балка двутавровая низколегированная 20К1 09Г2С</div>
+                <div class="position_quantity"><input type="text" class="position_quantity_i" value="100"><pre> / </pre><div class="input_wrap"><input type="text" class="position_quantity_i" value="1000"><div class="ed_izm">кв.метры</div></div></div>
+                <div class="position_close"><div class="position_close_img" onclick="this.parentNode.parentNode.remove();"></div></div>
+              </div>
+                <a href="#catalog" class="cart_position cart_add" onclick="cart.classList.remove('openedcart')">добавить товар...</a>
+            </div></div>
+              <div class="cart_position total_weight ordered-hidden" id="weight_reactroot"></div>
+              <div class="cart_position total_weight ordered-hidden" id="sale_reactroot_1"></div>
+              <div class="cart_position total_weight ordered-hidden" style="background-color: white;">
+                <span class="sale_text" style="color: black;">При покупке >25000 руб. скидка 3%, >50000 - 5%, >75000 - 7%, >100000 - 10%</span>
+              </div>
+              <div class="cart_position total_weight ordered-hidden" id="sale_reactroot"></div>
+            <div class="form_wrap ordered-hidden">
+            <div class="cart_row_3">ОФОРМЛЕНИЕ ЗАКАЗА</div>
+            <form method="POST" enctype="multipart/form-data" action="" class="cart_form" id="cart_form">
+              <div class="form_section">
+                <label for="form-name" class="form_text">Имя/название организации*</label>
+                <input type="text" name="form-name" id="form-name" class="form_input" required>
+              </div>
+              <div class="form_section">
+                <label for="form-phone" class="form_text">Телефон*</label>
+                <input type="text" name="form-phone" id="form-phone" class="form_input" required>
+              </div>
+              <div class="form_section">
+                <label for="form-mail" class="form_text">E-mail*</label>
+                <input type="text" name="form-mail" id="form-mail" class="form_input" required>
+              </div>
+              
+              <div class="form_section">
+                <label for="form-inn" class="form_text">ИНН</label>
+                <input type="text" name="form-inn" id="form-inn" class="form_input">
+              </div>
+              <div class="form_section form_section_area">
+                <label for="form-comms" class="form_text">Комментарии к заказу</label>
+                <div contenteditable id="form-comms" name="form-comms" class="form_input form_textarea" rows="5" cols="30"></div>
+              </div>
+              <div class="form_section">
+                <a href="#catalog" class="backto" onclick="cart.classList.remove('openedcart')">+ ПРОДОЛЖИТЬ ПОКУПКИ</a>
+              </div>
+              <div class="form_section form_section_submit">
+                <input type="submit" class="form_submitbutton g-recaptcha" data-sitekey="6LeBGlQpAAAAADNQRfvuHUD7KBFwJcfVKNZmqABz" data-callback="onSubmit" value="ОТПРАВИТЬ">
+                <div style="display: none;" class="form_positions_reactroot" id="form_positions_reactroot"></div></form>
+              </div>
+            <!--</form>-->
+          </div>
+          </div></div>
+          <div class="position_added_alarm" id="position_added_alarm"><pre>Товар добавлен в </pre><span class="popup_cart" onclick="main__menu.classList.remove('opened');cart.classList.add('openedcart')">корзину</span>!</div>
+        </main>
+    <script src="js/main.min.js"></script>
+</body>
+</html>

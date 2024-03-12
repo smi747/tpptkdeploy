@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администрирования</title>
+</head>
+<body style="padding: 0; margin: 0; height: 100%; background-color: aliceblue;">
+    <style>
+        .unvisible {
+            display: none;
+        }
+    </style>
+    <form method="POST" enctype="multipart/form-data" action="?p=1">
+        <p style="font-size: 25px; margin: 20px 10px 0; padding:0; border-bottom: 1px solid;font-family: Arial;">Обновление каталога</p>
+        <div class="form_section" style="display: flex; flex-direction: column; gap: 10px; padding: 20px;">
+            <label for="form-reqs" class="form_text">Загрузите файл (xls, xlsx):</label>
+            <input type="file" name="form-reqs" id="form-reqs" class="form_inputfile">
+            <input onclick='this.value="Загрузка..."' style="width: max-content;padding: 5px;font-weight: bold;" type="submit" value="ОБНОВИТЬ">
+        </div>
+    </form>
+    <form method="POST" enctype="multipart/form-data" action="?p=2">
+        <p style="font-size: 25px; margin: 20px 10px 0; padding:0; border-bottom: 1px solid;font-family: Arial;">Редактирование главной страницы (index.html)</p>
+        <div style="margin: 20px;display: flex;justify-content: center; flex-direction: column;align-items: center;gap: 10px;">
+            <p style="align-self: start; margin: 0;">Совет: воспользуйтесь поиском по странице (Shift+F3), чтобы найти фрагмент, который хотите править</p>
+            <textarea spellcheck="false" type="text" name="form-html" style="width: 90vw;height: 50vh;">~~~</textarea>
+            <input style="width: max-content;padding: 5px;font-weight: bold;color:green" type="submit" value="СОХРАНИТЬ ИЗМЕНЕНИЯ">
+        </div>
+    </form>
+    <p style="font-size: 25px; margin: 20px 10px 0; padding:0; border-bottom: 1px solid;font-family: Arial;">Редактирование дополнительных страниц</p>
+    <div id="root"></div>
+    <div id="root_2"></div>
+    <p style="font-size: 25px; margin: 20px 10px 0; padding:0; border-bottom: 1px solid;font-family: Arial;">Редактирование раздела "Услуги"</p>
+    <div id="root_3">
+        <p style="align-self: start; margin: 0;padding-left: 20px;padding-top: 10px;">В качестве обложки категории выбирается первое фото в алфавитном порядке (например, 1.jpg приоритетнее 2.jpg)</p>
+        <p style="align-self: start; margin: 0;padding-left: 20px;padding-top: 10px;">Категории, не содержащие фото, будут скрыты из отображения на главной странице</p>
+    </div>
+</body>
+<script>
+    const callBackendAPI = async () => {
+        const response = await fetch('/get_otherpages');
+        const body = await response.json();
+        //setSearchInput("");
+
+        if (response.status !== 200) {
+        throw Error(body.message)
+        }
+        return body;
+    };
+    let pagelist = [];
+    callBackendAPI()
+    .then(res => {pagelist = JSON.parse(res.express);pagelist.map(async x => {
+        let tmp_form_0 = document.createElement("form");
+        tmp_form_0.setAttribute("style", "margin: 20px;display: flex;justify-content: center;flex-direction: column;align-items: center;gap: 10px;")
+        tmp_form_0.setAttribute("method", "POST");
+        tmp_form_0.setAttribute("action", "?p=4&page="+x);
+
+        let tmp_5 = document.createElement("input");
+        tmp_5.setAttribute("type", "submit");
+        tmp_5.setAttribute("style", "color: red;font-weight: bold;padding: 5px;")
+        tmp_5.setAttribute("value", "УДАЛИТЬ СТРАНИЦУ");
+
+        tmp_form_0.appendChild(tmp_5);
+
+        let tmp_form = document.createElement("form");
+        tmp_form.setAttribute("style", "margin: 20px;display: flex;justify-content: center;flex-direction: column;align-items: center;gap: 10px;")
+        tmp_form.setAttribute("method", "POST");
+        tmp_form.setAttribute("action", "?p=3&page="+x);
+        let div_wrap = document.createElement("div");
+        div_wrap.setAttribute("style", "display:flex;align-items:center;gap:10px;flex-wrap: wrap;justify-content: center;");
+        let tmp_1 = document.createElement("p");
+        let tmp_2 = document.createElement("button");
+        let tmp_name = document.createElement("input");
+        tmp_name.setAttribute("type", "text");
+        tmp_name.setAttribute("name", "form-name");
+        tmp_name.value = x;
+        let tmp_3 = document.createElement("textarea");
+        let response = await fetch('otherpages/'+x);
+        tmp_3.innerHTML = await response.text();
+        //let string = "load('" + x + "')";
+        tmp_3.setAttribute("id", x);
+        tmp_3.setAttribute("class", "unvisible");
+        tmp_2.setAttribute("style", "height: fit-content;");
+        tmp_2.setAttribute("type", "button");
+        tmp_3.setAttribute("style", "width: 80vw;height: 50vh;white-space: pre-wrap");
+        tmp_3.setAttribute("spellcheck", "false");
+        tmp_3.setAttribute("type", "text");
+        tmp_3.setAttribute("name", "form-html");
+        tmp_2.setAttribute("onclick", "document.getElementById('" + x + "').classList.toggle('unvisible')");
+        tmp_2.innerText = "ПОКАЗАТЬ/СКРЫТЬ";
+        tmp_1.innerText = x;
+        tmp_1.setAttribute("style", "font-size:20px")
+        div_wrap.appendChild(tmp_name);
+        div_wrap.appendChild(tmp_2);
+        
+        let tmp_4 = document.createElement("input");
+        tmp_4.setAttribute("type", "submit");
+        tmp_4.setAttribute("value", "СОХРАНИТЬ ИЗМЕНЕНИЯ");
+        tmp_4.setAttribute("style", "font-weight: bold;padding: 5px;color:green;");
+
+        div_wrap.appendChild(tmp_4);
+        tmp_form.appendChild(div_wrap);
+        tmp_form.appendChild(tmp_3);
+        
+        let form_wrap = document.createElement("div");
+        form_wrap.setAttribute("style", "display:flex;align-items:center;gap:10px;flex-wrap: wrap;justify-content: center;border-bottom: 30px solid lightblue;");
+        
+
+        form_wrap.appendChild(tmp_form);
+        form_wrap.appendChild(tmp_form_0);
+        
+        root.appendChild(form_wrap);
+    });
+        let tmp_form = document.createElement("form");
+        tmp_form.setAttribute("style", "margin: 20px;display: flex;justify-content: center;flex-direction: column;align-items: center;gap: 10px;");
+        tmp_form.setAttribute("method", "POST");
+        tmp_form.setAttribute("action", "?p=5");
+        let div_wrap = document.createElement("div");
+        div_wrap.setAttribute("style", "display:flex;align-items:center;gap:10px;flex-wrap: wrap;justify-content: center;");
+        let tmp_name = document.createElement("input");
+        tmp_name.setAttribute("type", "text");
+        tmp_name.setAttribute("name", "form-name");
+        tmp_name.value = "Новая страница";
+        div_wrap.appendChild(tmp_name);
+        
+        let tmp_4 = document.createElement("input");
+        tmp_4.setAttribute("type", "submit");
+        tmp_4.setAttribute("value", "СОЗДАТЬ НОВУЮ СТРАНИЦУ");
+        tmp_4.setAttribute("style", "font-weight: bold;padding: 5px;color:green;");
+
+        div_wrap.appendChild(tmp_4);
+        tmp_form.appendChild(div_wrap);
+        
+        let form_wrap = document.createElement("div");
+        form_wrap.setAttribute("style", "display:flex;align-items:center;gap:10px;flex-wrap: wrap;justify-content: center;border-bottom: 30px solid lightblue;");
+        form_wrap.appendChild(tmp_form);
+    
+        root_2.appendChild(form_wrap);
+})
+    .catch(err => console.log(err));
+    
+
+    const get_photoslist = async () => {
+        const response = await fetch('/get_photos');
+        const body = await response.json();
+        //setSearchInput("");
+
+        if (response.status !== 200) {
+        throw Error(body.message)
+        }
+        return body;
+    };
+    let photoslist = [];
+    let namelist = ["ГИБКА МЕТАЛЛА", "ДОСТАВКА", "ЛАЗЕРНАЯ РЕЗКА", "ПЛАЗМЕННАЯ РЕЗКА", "РЕЗКА ЛЕНТОЧНОПИЛЬНЫМ СТАНКОМ", "РУБКА ГИЛЬОТИНОЙ", "СВЕРЛЕНИЕ ОТВЕРСТИЙ",];
+    get_photoslist()
+    .then(res => {photoslist = JSON.parse(res.express);
+        photoslist.map((x, i) => {
+            
+            let file_wrap = document.createElement("div");
+            file_wrap.setAttribute("style","border-bottom: 10px solid lightblue;padding: 0 20px;gap:10px;display: flex;flex-direction: column;padding-bottom:20px;")
+            
+            let name = document.createElement("p");
+            name.innerText = namelist[i];
+            file_wrap.appendChild(name);
+            x.map(y => {
+                let photoelement = document.createElement("a");
+                photoelement.setAttribute("style", "padding-left:20px")
+                photoelement.innerText = y;
+                photoelement.setAttribute("href", "images/slider/0"+(i+1)+"/"+y);
+                photoelement.setAttribute("target", "blank");
+                let del_photo = document.createElement("input");
+                del_photo.setAttribute("type", "submit");
+                del_photo.setAttribute("style", "color: red;font-weight: bold;height: fit-content;align-self: center;")
+                del_photo.setAttribute("value", "УДАЛИТЬ ФОТО");
+                
+                let file_wrap_2 = document.createElement("form");
+                file_wrap_2.setAttribute("method", "POST");
+                file_wrap_2.setAttribute("action", "delete_photo?dir=0"+(i+1)+"&ph="+y);
+                file_wrap_2.setAttribute("style", "display: flex;gap:30px")
+                file_wrap_2.appendChild(photoelement);
+                file_wrap_2.appendChild(del_photo);
+                file_wrap.appendChild(file_wrap_2)});
+            let file_input = document.createElement("input");
+            file_input.setAttribute("type", "file");
+            file_input.setAttribute("name", "form-photo");
+            file_input.setAttribute("class", "form_inputfile");
+            let button_input = document.createElement("input");
+            button_input.setAttribute("type", "submit");
+            button_input.setAttribute("value", "+ЗАГРУЗИТЬ ФОТО");
+            button_input.setAttribute("style", "width: max-content;font-weight: bold;height: fit-content;align-self: center;color:green");
+            
+
+            let tmp_form = document.createElement("form");
+            tmp_form.setAttribute("enctype", "multipart/form-data");
+            tmp_form.setAttribute("style", "display: flex;flex-wrap: wrap;gap: 5px;");
+            tmp_form.setAttribute("method", "POST");
+            tmp_form.setAttribute("action", "change_photo?dir=0"+(i+1));
+            
+            tmp_form.appendChild(file_input);
+            tmp_form.appendChild(button_input);
+
+            file_wrap.append(tmp_form);
+            root_3.appendChild(file_wrap);
+        });
+    }).catch(err => console.log(err));
+
+
+    
+</script>
+</html>

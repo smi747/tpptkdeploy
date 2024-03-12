@@ -1,0 +1,5 @@
+LOAD DATA INFILE 'root/metallist/matallist-market/GFG' 
+INTO TABLE position 
+FIELDS TERMINATED BY ',' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
