@@ -113,7 +113,7 @@ const upload = multer({ storage: storage })
 
 const request = require("request");
 app.post("/", upload.single('form-reqs'), function (req, res) {
-    let secretKey = "6LeBGlQpAAAAAHJaQlMm1QDG1NR2WFK5FPVPMC1A"; // Put your secret key here.
+    let secretKey = "6LcbyJYpAAAAAP85ZTMMafNTs16PVSTeyuuTc3EO"; // Put your secret key here.
     let verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
     // Google will respond with success or error scenario on url request sent.
     request(verificationUrl,function(error,response,body) {

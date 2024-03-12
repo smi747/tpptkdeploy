@@ -82,7 +82,7 @@ async function send(inp, file) {
     let attchs = []
     if (typeof file != 'undefined')
         attchs = [{ filename: file.originalname, content: Uint8Array.from(file.buffer.data) }];
-    console.log(await sendMail("sabpp@mail.ru", 'Заказ на сайте ООО ТПП "ТехКомплект"', text, textHtml, attchs));
+    console.log(await sendMail("493929@bk.ru", 'Заказ на сайте ООО ТПП "ТехКомплект"', text, textHtml, attchs));
     let textHtml_toClient = "<p>Здравствуйте,&nbsp;" + inp["form-name"] + "!</p>" + 
     "<p>Уведомляем, что Ваш заказ на сайте <a href='https://тпптк.рф'>https://тпптк.рф</a> принят в обработку</p>" +
     tmp_tables + "<p>Уточнить детали заказа можно по телефону +7-910-935-10-48</p><p>WhatsApp, Telegram, Viber</p><p>Хорошего дня!</p>";
