@@ -1,3 +1,6 @@
 User-agent: *
 
-Disallow: /
+Disallow: /login
+Disallow: /admin
+
+Host: https://www.xn--j1ajakc.xn--p1ai
