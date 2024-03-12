@@ -141,69 +141,7 @@
     .catch(err => console.log(err));
     
 
-    const get_photoslist = async () => {
-        const response = await fetch('/get_photos');
-        const body = await response.json();
-        //setSearchInput("");
-
-        if (response.status !== 200) {
-        throw Error(body.message)
-        }
-        return body;
-    };
-    let photoslist = [];
-    let namelist = ["ГИБКА МЕТАЛЛА", "ДОСТАВКА", "ЛАЗЕРНАЯ РЕЗКА", "ПЛАЗМЕННАЯ РЕЗКА", "РЕЗКА ЛЕНТОЧНОПИЛЬНЫМ СТАНКОМ", "РУБКА ГИЛЬОТИНОЙ", "СВЕРЛЕНИЕ ОТВЕРСТИЙ",];
-    get_photoslist()
-    .then(res => {photoslist = JSON.parse(res.express);
-        photoslist.map((x, i) => {
-            
-            let file_wrap = document.createElement("div");
-            file_wrap.setAttribute("style","border-bottom: 10px solid lightblue;padding: 0 20px;gap:10px;display: flex;flex-direction: column;padding-bottom:20px;")
-            
-            let name = document.createElement("p");
-            name.innerText = namelist[i];
-            file_wrap.appendChild(name);
-            x.map(y => {
-                let photoelement = document.createElement("a");
-                photoelement.setAttribute("style", "padding-left:20px")
-                photoelement.innerText = y;
-                photoelement.setAttribute("href", "images/slider/0"+(i+1)+"/"+y);
-                photoelement.setAttribute("target", "blank");
-                let del_photo = document.createElement("input");
-                del_photo.setAttribute("type", "submit");
-                del_photo.setAttribute("style", "color: red;font-weight: bold;height: fit-content;align-self: center;")
-                del_photo.setAttribute("value", "УДАЛИТЬ ФОТО");
-                
-                let file_wrap_2 = document.createElement("form");
-                file_wrap_2.setAttribute("method", "POST");
-                file_wrap_2.setAttribute("action", "delete_photo?dir=0"+(i+1)+"&ph="+y);
-                file_wrap_2.setAttribute("style", "display: flex;gap:30px")
-                file_wrap_2.appendChild(photoelement);
-                file_wrap_2.appendChild(del_photo);
-                file_wrap.appendChild(file_wrap_2)});
-            let file_input = document.createElement("input");
-            file_input.setAttribute("type", "file");
-            file_input.setAttribute("name", "form-photo");
-            file_input.setAttribute("class", "form_inputfile");
-            let button_input = document.createElement("input");
-            button_input.setAttribute("type", "submit");
-            button_input.setAttribute("value", "+ЗАГРУЗИТЬ ФОТО");
-            button_input.setAttribute("style", "width: max-content;font-weight: bold;height: fit-content;align-self: center;color:green");
-            
-
-            let tmp_form = document.createElement("form");
-            tmp_form.setAttribute("enctype", "multipart/form-data");
-            tmp_form.setAttribute("style", "display: flex;flex-wrap: wrap;gap: 5px;");
-            tmp_form.setAttribute("method", "POST");
-            tmp_form.setAttribute("action", "change_photo?dir=0"+(i+1));
-            
-            tmp_form.appendChild(file_input);
-            tmp_form.appendChild(button_input);
-
-            file_wrap.append(tmp_form);
-            root_3.appendChild(file_wrap);
-        });
-    }).catch(err => console.log(err));
+    
 
 
     
