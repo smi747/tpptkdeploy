@@ -29,7 +29,7 @@ for i in snames:
 #75000 - 7
 #100000 - 10
 
-with open('GFG', 'w', encoding="utf-8", newline='\n') as f:
+with open('/var/lib/mysql/tpptkdb/GFG', 'w', encoding="utf-8", newline='\n') as f:
     # using csv.writer method from CSV package
     write = csv.writer(f, delimiter = "`", quoting = csv.QUOTE_NONE, quotechar='')
 
